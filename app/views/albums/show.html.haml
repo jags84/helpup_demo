@@ -1,3 +1,7 @@
 .container
   .row
     %h1 Albums#show
+  .row
+    = form_tag pictures_path, multipart: true do
+      = file_field_tag :photo
+      = submit_tag
