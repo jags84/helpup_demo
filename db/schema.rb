@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171112085538) do
+ActiveRecord::Schema.define(version: 20171112115625) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "albums", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "title"
+    t.boolean "private"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_albums_on_user_id"
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.bigint "album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["album_id"], name: "index_pictures_on_album_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,4 +48,6 @@ ActiveRecord::Schema.define(version: 20171112085538) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "albums", "users"
+  add_foreign_key "pictures", "albums"
 end

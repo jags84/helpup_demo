@@ -2,9 +2,38 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title Helpup
+    %title HelpUp Demo
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag "#{controller_name}", :media => "all"
   %body
+    %nav.navbar.navbar-default
+      .container-fluid
+        / Brand and toggle get grouped for better mobile display
+        .navbar-header
+          %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %a.navbar-brand{:href => albums_path} HelpUp
+        / Collect the nav links, forms, and other content for toggling
+        - unless current_user.nil?
+          #bs-example-navbar-collapse-1.collapse.navbar-collapse
+            %ul.nav.navbar-nav.navbar-right
+              %li{class: "#{controller_name=='albums' ? 'active':''}"}
+                %a{:href => albums_path}
+                  My Albums
+              %li.dropdown
+                %a.dropdown-toggle{"aria-expanded" => "false", "aria-haspopup" => "true", "data-toggle" => "dropdown", :href => "#", :role => "button"}
+                  = current_user.email
+                  %span.caret
+                %ul.dropdown-menu
+                  %li
+                    %a{:href => edit_user_registration_path} Edit my information
+                  %li.divider{role: "separator"}
+                  %li
+                    = link_to 'Logout', destroy_user_session_path, :method => :delete
     = yield
+    = javascript_include_tag 'application'
+    = javascript_include_tag "#{controller_name}"

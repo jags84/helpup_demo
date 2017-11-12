@@ -1,8 +1,13 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery with: :exception
+  protect_from_forgery prepend: true
   layout :layout_by_resource
   before_action :configure_permitted_parameters, if: :devise_controller?
-  
+  before_action :check_signed_in
+
+  def check_signed_in
+    redirect_to albums_path if signed_in? and controller_name == 'home'
+  end
+
   protected
     def configure_permitted_parameters
       # sign_up
