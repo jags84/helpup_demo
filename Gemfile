@@ -70,3 +70,6 @@ gem 'bootstrap-sass'
 gem 'devise'
 # jquery
 gem 'jquery-rails'
+# Carrierwave
+gem 'carrierwave', '~> 1.0'
+

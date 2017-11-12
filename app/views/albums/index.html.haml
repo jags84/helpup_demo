@@ -3,17 +3,16 @@
     .col-12.text-right
       %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-album-modal"} 
         New Album
-  - @albums.each_slice(4) do |album_g|
-    .row
-      .col-12
-        - album_g.each do |album|
-          .col-md-3
-            .panel.panel-default
-              .panel-body
-                %img.empty-folder{src: asset_path("empty_album.png")}
-              .panel-footer
-                %a{href: album_path(album.id)}
-                  =album.title
+  .row
+    .col-12
+      - @albums.each do |album|
+        .col-lg-3.col-md-4.col-sm-6.col-xs-6
+          .panel.panel-default
+            .panel-body
+              %img.empty-folder{src: asset_path("empty_album.png")}
+            .panel-footer
+              %a{href: album_path(album.id)}
+                =album.title
 
   #new-album-modal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
