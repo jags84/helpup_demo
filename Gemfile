@@ -68,3 +68,5 @@ gem "haml-rails", "~> 1.0"
 gem 'bootstrap-sass'
 # devise
 gem 'devise'
+# jquery
+gem 'jquery-rails'
