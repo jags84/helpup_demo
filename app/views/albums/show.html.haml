@@ -1,7 +1,34 @@
 .container
+  .row.new-album-section
+    .col-12.text-right
+      %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-pictures-modal"} 
+        Upload Pictures
   .row
-    %h1 Albums#show
+    .col-12
+      - @album.pictures.each do |picture|
+        .col-lg-3.col-md-4.col-sm-6.col-xs-6
+          .panel.panel-default
+            .panel-body
+              %img.empty-folder{src: picture.photo.url}
+
   .row
     = form_tag pictures_path, multipart: true do
       = file_field_tag :photo
       = submit_tag
+
+  #new-pictures-modal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+    .modal-dialog{:role => "document"}
+      .modal-content
+        .modal-header
+          %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+            %span{"aria-hidden" => "true"} ×
+          %h4#myModalLabel.modal-title
+            New Pictures
+        .modal-body
+          %form#my-awesome-dropzone.dropzone{:action => "/file-upload"}          
+              
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 
+            Close
+          %button.btn.btn-primary.create-album{:type => "button"} 
+            Create Album
