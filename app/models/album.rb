@@ -1,6 +1,7 @@
 class Album < ApplicationRecord
   belongs_to :user
   has_many :pictures
+  validates :title, :privacy
 
   def is_empty?
     self.pictures.length == 0 ? true : false
@@ -13,4 +14,5 @@ class Album < ApplicationRecord
       self.pictures.first.photo.url
     end
   end
+  
 end
