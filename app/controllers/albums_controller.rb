@@ -21,7 +21,7 @@ class AlbumsController < ApplicationController
         format.html { redirect_to @album, notice: 'Album was successfully created.' }
         format.json { render :show, status: :created, location: @album }
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @album.errors, status: :unprocessable_entity }
       end
     end
@@ -35,7 +35,7 @@ class AlbumsController < ApplicationController
           format.html { redirect_to @album, notice: 'Album was successfully updated.' }
           format.json { render :show, status: :ok, location: @album }
         else
-          format.html { render :edit }
+          format.html { render :show }
           format.json { render json: @album.errors, status: :unprocessable_entity }
         end
       end

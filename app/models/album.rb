@@ -22,7 +22,6 @@ class Album < ApplicationRecord
   def self.album_owner(album_id,current_user)
     album = Album.find(album_id)
     album.user == current_user ? true : false
-
   end
 
   private

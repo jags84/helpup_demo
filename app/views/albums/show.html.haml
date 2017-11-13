@@ -1,5 +1,5 @@
 .container
-  - if current_user == @album.user_id
+  - if current_user.id == @album.user_id
     .row
       %h2.text-center
         = @album.title
@@ -10,6 +10,11 @@
       .col-12.text-right
         %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-pictures-modal"} 
           Upload Pictures
+  - else
+    .row
+      %h2.text-center
+        = @album.title  
+
   .row
     .col-12
       - @pictures.each do |picture|
