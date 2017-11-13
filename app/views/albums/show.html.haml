@@ -1,14 +1,17 @@
 .container
+  .row
+    %h2.text-center
+      = @album.title
   .row.new-album-section
     .col-12.text-right
       %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-pictures-modal"} 
         Upload Pictures
   .row
     .col-12
-      - @album.pictures.each do |picture|
+      - @pictures.each do |picture|
         .col-lg-3.col-md-4.col-sm-6.col-xs-6
-          .panel.panel-default.image-panel
-            .panel-body
+          .panel.panel-default
+            .panel-body.image-panel
               %img.album-picture.img-responsive.center-block{src: picture.photo.url}
 
   #new-pictures-modal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
@@ -27,5 +30,6 @@
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 
             Close
-          %button.btn.btn-primary.create-album{:type => "button"} 
-            Create Album
+
+  .row
+    = will_paginate @pictures

@@ -1,11 +1,12 @@
 class AlbumsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @albums = current_user.albums
+    @albums = current_user.albums.paginate(:page => params[:page], :per_page => 12)
   end
 
   def show
     @album = Album.find(params[:id])
+    @pictures = @album.pictures.paginate(:page => params[:page], :per_page => 12)
   end
 
   def create
