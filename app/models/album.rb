@@ -19,6 +19,12 @@ class Album < ApplicationRecord
     self.private
   end
 
+  def self.album_owner(album_id,current_user)
+    album = Album.find(album_id)
+    album.user == current_user ? true : false
+
+  end
+
   private
     def album_params
       params.require(:album).permit(:title,:private)

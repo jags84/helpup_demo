@@ -3,12 +3,20 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 #= require dropzone
 $ ->
-  # Click Album
-  $('.create-album').on "click", ->
-    create_album()
+  is_validated = false
+
+  $('#album-form').validator().on 'validate.bs.validator', (e) ->
+    is_validated = true
+  # Create Album
+  $('.create-album').on "click", (e) ->
+    e.preventDefault()
+    if is_validated
+      create_album()
   # Update Album
-  $('.update-album').on "click", ->
-    update_album()
+  $('.update-album').on "click", (e) ->
+    e.preventDefault()
+    if is_validated
+      update_album()
   # Modal Hide event
   $('#new-pictures-modal').on "hidden.bs.modal", ->
     location.reload()

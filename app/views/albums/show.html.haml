@@ -1,14 +1,15 @@
 .container
-  .row
-    %h2.text-center
-      = @album.title
-    %h6.text-center.edit-text
-      %a{href:"#","data-toggle" => "modal", "data-target" => "#new-album-modal"}
-        (Edit)
-  .row.new-album-section
-    .col-12.text-right
-      %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-pictures-modal"} 
-        Upload Pictures
+  - if current_user == @album.user_id
+    .row
+      %h2.text-center
+        = @album.title
+      %h6.text-center.edit-text
+        %a{href:"#","data-toggle" => "modal", "data-target" => "#new-album-modal"}
+          (Edit)
+    .row.new-album-section
+      .col-12.text-right
+        %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-pictures-modal"} 
+          Upload Pictures
   .row
     .col-12
       - @pictures.each do |picture|
