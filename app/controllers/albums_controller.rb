@@ -23,6 +23,19 @@ class AlbumsController < ApplicationController
     end
   end
 
+  def update
+    @album = Album.find(params[:id])
+    respond_to do |format|
+      if @album.update(album_params)
+        format.html { redirect_to @album, notice: 'Location was successfully updated.' }
+        format.json { render :show, status: :ok, location: @album }
+      else
+        format.html { render :edit }
+        format.json { render json: @album.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def album_params

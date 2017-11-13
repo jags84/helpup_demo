@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :albums
-  validates :email
+  validates :email, presence: true
   
   private
     def user_params
