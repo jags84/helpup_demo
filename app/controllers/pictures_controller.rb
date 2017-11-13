@@ -1,12 +1,12 @@
 class PicturesController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   def create
     p "PARAMS"
     p params
 
     @picture = Picture.new()
     @picture.album = Album.first
-    @picture.photo = params[:photo]
+    @picture.photo = params[:file]
 
     if @picture.save!
       respond_to do |format|

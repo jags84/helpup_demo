@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery prepend: true
+  protect_from_forgery with: :null_session
   layout :layout_by_resource
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :check_signed_in

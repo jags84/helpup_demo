@@ -7,14 +7,9 @@
     .col-12
       - @album.pictures.each do |picture|
         .col-lg-3.col-md-4.col-sm-6.col-xs-6
-          .panel.panel-default
+          .panel.panel-default.image-panel
             .panel-body
-              %img.empty-folder{src: picture.photo.url}
-
-  .row
-    = form_tag pictures_path, multipart: true do
-      = file_field_tag :photo
-      = submit_tag
+              %img.album-picture.img-responsive.center-block{src: picture.photo.url}
 
   #new-pictures-modal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
     .modal-dialog{:role => "document"}
@@ -24,9 +19,11 @@
             %span{"aria-hidden" => "true"} ×
           %h4#myModalLabel.modal-title
             New Pictures
-        .modal-body
-          %form#my-awesome-dropzone.dropzone{:action => "/file-upload"}          
-              
+        .modal-body     
+          = form_tag pictures_path, multipart: true, :class => 'dropzone' do
+            .fallback
+              = file_field_tag :photo    
+
         .modal-footer
           %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 
             Close
