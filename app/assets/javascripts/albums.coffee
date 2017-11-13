@@ -3,9 +3,14 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 #= require dropzone
 $ ->
+  # Click Event
   $('.create-album').on "click", ->
     create_album()
+  # Modal Hide event
+  $('#new-pictures-modal').on "hidden.bs.modal", ->
+    location.reload()
 
+# Create a new album
 create_album = () ->
   params = 'album':
     'title': $('#album-title').val()
@@ -23,6 +28,11 @@ create_album = () ->
     error: ->
       # Log Error
     success: (response) ->
-      console.log response
       $('#new-album-modal').modal('toggle')
-      location.reload()
+      reload_site()
+
+
+# Relaod Site
+reload_site = () ->
+  location.reload()
+
