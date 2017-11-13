@@ -13,7 +13,18 @@
 .image-panel{
   height: 230px;
 }
-.album-picture{
+.album-picture {
   width: 85%;
 }
 
+@media (max-width : 575px) {
+  .image-panel{
+    height: 160px;
+  }
+}
+
+@media only screen and (max-width : 380px) {
+  .image-panel{
+    height: 130px;
+  }
+}
