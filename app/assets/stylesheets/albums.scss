@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 @import "dropzone.css";
 
-.empty-folder{
+.album-folder{
   width: 100%;
 }
 .new-album-section{
@@ -11,8 +11,9 @@
   padding-bottom:15px;
 }
 .image-panel{
-  min-height: 200px;
+  height: 230px;
 }
 .album-picture{
-  // width: 100%;
+  width: 85%;
 }
+

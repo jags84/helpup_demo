@@ -72,4 +72,6 @@ gem 'devise'
 gem 'jquery-rails'
 # Carrierwave
 gem 'carrierwave', '~> 1.0'
+# Paginate
+gem 'will_paginate', '~> 3.1.0'
 

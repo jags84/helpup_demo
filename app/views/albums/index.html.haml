@@ -8,8 +8,8 @@
       - @albums.each do |album|
         .col-lg-3.col-md-4.col-sm-6.col-xs-6
           .panel.panel-default
-            .panel-body
-              %img.empty-folder{src: asset_path("empty_album.png")}
+            .panel-body.image-panel
+              %img.album-picture.img-responsive.center-block{src: album.album_cover}
             .panel-footer
               %a{href: album_path(album.id)}
                 =album.title
@@ -28,9 +28,8 @@
               %label{:for => "album-title"} Album Title:
               %input#album-title.form-control{:type => "text"}
             .form-group
-              .row
-                %label
-                  Privacy
+              %label
+                Privacy
               .radio
                 %label
                   %input.privacy-type{:name => "privacy", :type => "radio", value: "true", "checked": "checked"}>
