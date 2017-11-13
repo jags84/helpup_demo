@@ -1,0 +1,30 @@
+// Place all the styles related to the Albums controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "dropzone.css";
+
+.album-folder{
+  width: 100%;
+}
+.new-album-section{
+  padding-right:15px;
+  padding-bottom:15px;
+}
+.image-panel{
+  height: 230px;
+}
+.album-picture {
+  width: 85%;
+}
+
+@media (max-width : 575px) {
+  .image-panel{
+    height: 160px;
+  }
+}
+
+@media only screen and (max-width : 380px) {
+  .image-panel{
+    height: 130px;
+  }
+}

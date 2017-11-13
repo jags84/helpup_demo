@@ -1,0 +1,21 @@
+.container
+  .row
+    .col-md-6.col-md-offset-3
+      .login-panel.panel.panel-default
+        .panel-heading
+          %h3.panel-title Login
+        .panel-body
+          = form_for(:user, :url => session_path(:user),html: {role: "form", 'data-toggle': "validator"}) do |f|
+            %fieldset
+              .form-group
+                = f.label :email
+                = f.email_field :email, class: 'form-control', required: true,'data-error': "You must enter a valid email"
+                .help-block.with-errors
+              .form-group
+                = f.label :password
+                = f.password_field :password, class: 'form-control', required: true,'data-error': "You must enter a valid password"
+                .help-block.with-errors
+              .actions
+                = f.submit 'Login', class: "btn btn-success btn-block"
+              = link_to "Sign Up", new_user_registration_path
+              %br

@@ -1,0 +1,35 @@
+#new-album-modal.modal.fade{"aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1",'data-privacy'=> "#{@album ? @album.is_private? : true}", "data-id" => "#{@album ? @album.id : ''}"}
+  .modal-dialog{:role => "document"}
+    .modal-content
+      .modal-header
+        %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+          %span{"aria-hidden" => "true"} ×
+        %h4#myModalLabel.modal-title
+          = @album ? "Edit Album" : "New Album"
+      %form#album-form{'data-toggle':"validator", role: "form"}
+        .modal-body
+          .form-group
+            %label{:for => "album-title"} Album Title:
+            %input#album-title.form-control{:type => "text", value: "#{@album ? @album.title : ''}", 'data-error': "You need to set a Title", 'required': true}
+            .help-block.with-errors
+          .form-group
+            %label
+              Privacy
+            .radio
+              %label
+                %input.privacy-type#private-radio-button{:name => "privacy", :type => "radio", value: "true",'required': true}>
+                Private
+            .radio
+              %label
+                %input.privacy-type#public-radio-button{:name => "privacy", :type => "radio", value: "false",'required': true}>
+                Public
+            .help-block.with-errors
+        .modal-footer
+          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 
+            Close
+          - if @album
+            %button.btn.btn-primary.update-album{:type => "submit"} 
+              Update Album
+          - else
+            %button.btn.btn-primary.create-album{:type => "submit"} 
+              Create Album
