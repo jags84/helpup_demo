@@ -23,12 +23,11 @@
           %h4#myModalLabel.modal-title
             New Pictures
         .modal-body     
-          = form_tag pictures_path, multipart: true, :class => 'dropzone' do
+          = form_tag album_pictures_path(@album.id), multipart: true, :class => 'dropzone' do
             .fallback
-              = file_field_tag :photo    
-
+              = file_field_tag :file    
         .modal-footer
-          %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 
+          %button.btn.btn-default#upload-image-close{"data-dismiss" => "modal", :type => "button"} 
             Close
 
   .row

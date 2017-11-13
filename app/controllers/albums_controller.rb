@@ -1,7 +1,7 @@
 class AlbumsController < ApplicationController
   before_action :authenticate_user!
   def index
-    @albums = current_user.albums.paginate(:page => params[:page], :per_page => 12)
+    @albums = current_user.albums.order('created_at DESC').paginate(:page => params[:page], :per_page => 12)
   end
 
   def show
