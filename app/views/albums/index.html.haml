@@ -1,10 +1,19 @@
 .container
   .row.new-album-section
-    .col-12.text-right
-      %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-album-modal"} 
-        New Album
+    - if @albums.count > 0
+      .col-lg-12.col-md-12.col-sm-12.col-xs-12.text-right
+        %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-album-modal"} 
+          New Album
+    - else
+      .col-lg-12.col-md-12.col-sm-12.col-xs-12
+        .alert.alert-warning.alert-dismissible{:role => "alert"}
+          %strong
+            You don't have any albums yet!, start by creating one
+          %span
+            %button.btn.btn-primary{:type => "button","data-toggle" => "modal", "data-target" => "#new-album-modal"} 
+              New Album
   .row
-    .col-12
+    .col-lg-12.col-md-12.col-sm-12.col-xs-12
       - @albums.each do |album|
         .col-lg-3.col-md-4.col-sm-6.col-xs-6
           .panel.panel-default
@@ -13,5 +22,7 @@
             .panel-footer
               %a{href: album_path(album.id)}
                 =album.title
+  .row
+    = will_paginate @pictures
   / Album Modal
   = render :partial => "/shared/album_modal"

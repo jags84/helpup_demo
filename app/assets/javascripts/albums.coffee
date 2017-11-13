@@ -4,6 +4,10 @@
 #= require dropzone
 $ ->
   is_validated = false
+  Dropzone.options.fileuploader =
+    paramName: 'file'
+    maxFilesize: 6
+    acceptedFiles: "image/jpeg,image/png,image/gif"
 
   $('#album-form').validator().on 'validate.bs.validator', (e) ->
     is_validated = true
@@ -20,7 +24,7 @@ $ ->
   # Modal Hide event
   $('#new-pictures-modal').on "hidden.bs.modal", ->
     location.reload()
-
+  # Set Privacy
   $('#new-album-modal').on "shown.bs.modal", ->
     privacy = $('#new-album-modal').data('privacy')
     if privacy
