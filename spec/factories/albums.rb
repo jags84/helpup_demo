@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :album do
-    user nil
-    title "MyString"
+    user
+    title "Album Title"
     private false
   end
 end

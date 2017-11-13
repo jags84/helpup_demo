@@ -1,12 +1,16 @@
 class AlbumsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   def index
     @albums = current_user.albums.order('created_at DESC').paginate(:page => params[:page], :per_page => 12)
   end
 
   def show
     @album = Album.find(params[:id])
-    @pictures = @album.pictures.paginate(:page => params[:page], :per_page => 12)
+    if Album.album_owner(params[:id],current_user) || !@album.private
+      @pictures = @album.pictures.paginate(:page => params[:page], :per_page => 12)
+    else
+      redirect_to albums_path
+    end
   end
 
   def create
@@ -17,7 +21,7 @@ class AlbumsController < ApplicationController
         format.html { redirect_to @album, notice: 'Album was successfully created.' }
         format.json { render :show, status: :created, location: @album }
       else
-        format.html { render :new }
+        format.html { render :index }
         format.json { render json: @album.errors, status: :unprocessable_entity }
       end
     end
@@ -25,13 +29,20 @@ class AlbumsController < ApplicationController
 
   def update
     @album = Album.find(params[:id])
-    respond_to do |format|
-      if @album.update(album_params)
-        format.html { redirect_to @album, notice: 'Location was successfully updated.' }
+    if @album.user_id == current_user.id
+      respond_to do |format|
+        if @album.update(album_params)
+          format.html { redirect_to @album, notice: 'Album was successfully updated.' }
+          format.json { render :show, status: :ok, location: @album }
+        else
+          format.html { render :show }
+          format.json { render json: @album.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @album, notice: 'Album was not updated.' }
         format.json { render :show, status: :ok, location: @album }
-      else
-        format.html { render :edit }
-        format.json { render json: @album.errors, status: :unprocessable_entity }
       end
     end
   end
