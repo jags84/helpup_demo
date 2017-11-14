@@ -31,6 +31,12 @@ $ ->
       $('#private-radio-button').attr('checked','checked')
     else
       $('#public-radio-button').attr('checked','checked')
+  # Image Click
+  $(".view-picture").on "click", (e)->
+    e.preventDefault()
+    $('#picture-modal').modal()
+    image = $(this).data('image-src')
+    $('#current-image').attr('src',image)
 
 # Create a new album
 create_album = () ->

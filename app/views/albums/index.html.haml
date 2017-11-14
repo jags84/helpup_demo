@@ -21,7 +21,7 @@
               %img.img-responsive{src: album.album_cover}
             .panel-footer
               %a{href: album_path(album.id)}
-                =album.title
+                = album.title
   .row
     = will_paginate @pictures
   / Album Modal
